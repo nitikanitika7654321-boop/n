@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Performance Predictor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">P</span>
+      <span class="brand-name">Product Performance Predictor</span>
+    </div>
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+      <span class="sun" aria-hidden="true">☀️</span>
+      <span class="moon" aria-hidden="true" style="display:none">🌙</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="sidebar" aria-label="Navigation">
+      <nav>
+        <ul>
+          <li><button class="nav-btn" data-section="products">Product Information</button></li>
+          <li><button class="nav-btn" data-section="dashboard">Campaign Performance</button></li>
+        </ul>
+      </nav>
+    </section>
+
+    <section class="content" id="content-area" aria-label="Content Area">
+      <!-- Product Information Section -->
+      <div class="card section" id="products" tabindex="0" aria-labelledby="products-title" style="display:block;">
+        <div class="card-header">
+          <h2 id="products-title">Product Information</h2>
+          <button class="primary" id="addProductBtn">Add Product</button>
+        </div>
+
+        <div class="card-body">
+          <table class="table" id="productTable" aria-label="Product Table">
+            <thead>
+              <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Target CPA</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <!-- Rows added dynamically -->
+            </tbody>
+          </table>
+          <div class="empty-state" id="noProducts" style="display:none;">
+            No products yet. Click "Add Product" to create one.
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaign Performance Dashboard Section -->
+      <div class="card section" id="dashboard" tabindex="0" aria-labelledby="dashboard-title" style="display:none;">
+        <div class="card-header">
+          <h2 id="dashboard-title">Campaign Performance Dashboard</h2>
+        </div>
+
+        <div class="card-body dashboard-grid">
+          <div class="widget">
+            <div class="widget-title">Impressions</div>
+            <div class="widget-value" id="impressionsValue">0</div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">Clicks</div>
+            <div class="widget-value" id="clicksValue">0</div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">Conversions</div>
+            <div class="widget-value" id="conversionsValue">0</div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">Revenue</div>
+            <div class="widget-value" id="revenueValue">$0</div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">Conversion Rate</div>
+            <div class="widget-value" id="crValue">0%</div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">CTR</div>
+            <div class="widget-value" id="ctrValue">0%</div>
+          </div>
+        </div>
+
+        <div class="timeline" aria-label="Campaign Timeline">
+          <h3>Recent Activity</h3>
+          <ul id="timeline" class="timeline-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Product Modal -->
+  <div class="modal" id="addProductModal" aria-hidden="true" aria-label="Add product">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Product</h3>
+        <button class="close" id="closeModal" aria-label="Close">✖</button>
+      </div>
+      <form id="addProductForm" autocomplete="off">
+        <div class="form-row">
+          <label for="prodName">Name</label>
+          <input type="text" id="prodName" name="name" required placeholder="Product name" />
+        </div>
+        <div class="form-row">
+          <label for="prodCat">Category</label>
+          <input type="text" id="prodCat" name="category" required placeholder="Category" />
+        </div>
+        <div class="form-row">
+          <label for="prodPrice">Price</label>
+          <input type="number" id="prodPrice" name="price" required min="0" step="0.01" placeholder="0.00" />
+        </div>
+        <div class="form-row">
+          <label for="prodCPA">Target CPA</label>
+          <input type="number" id="prodCPA" name="targetCpa" required min="0" step="0.01" placeholder="0.00" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="secondary" id="cancelBtn">Cancel</button>
+          <button type="submit" class="primary">Add Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
